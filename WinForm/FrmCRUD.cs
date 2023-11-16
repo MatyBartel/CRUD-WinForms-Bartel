@@ -34,6 +34,8 @@ namespace WinFormApp
         }
 
         private Usuario usuarioActual;
+
+        private string rutaArchivo = @"..\..\..\archivo.xml";
         #endregion
 
         #region Constructor
@@ -212,7 +214,7 @@ namespace WinFormApp
 
                 if (result == DialogResult.OK)
                 {
-                    using (XmlTextWriter writer = new XmlTextWriter(@"..\..\..\archivo.xml", Encoding.UTF8))
+                    using (XmlTextWriter writer = new XmlTextWriter(rutaArchivo, Encoding.UTF8)) // Utiliza la misma ruta
                     {
                         XmlSerializer ser = new XmlSerializer(typeof(Bolsa));
                         ser.Serialize(writer, bolsaDeProductos);
@@ -223,10 +225,8 @@ namespace WinFormApp
                     e.Cancel = true;
                 }
 
-                // Establecer cerrarAplicacion a true para evitar repetir la lógica de cierre
                 cerrarAplicacion = true;
 
-                // Cerrar la aplicación después de procesar el resultado
                 Application.Exit();
             }
         }
@@ -235,23 +235,41 @@ namespace WinFormApp
         /// </summary>
         private void FrmCRUD_Load(object sender, EventArgs e)
         {
-            string archivoXML = @"..\..\..\archivo.xml";
 
-            if (File.Exists(archivoXML))
+            try
             {
-                try
+                if (File.Exists(rutaArchivo))
                 {
-                    using (XmlTextReader reader = new XmlTextReader(archivoXML))
+                    using (XmlTextReader reader = new XmlTextReader(rutaArchivo))
                     {
                         XmlSerializer serializador = new XmlSerializer(typeof(Bolsa));
                         this.bolsaDeProductos = (Bolsa)serializador.Deserialize(reader);
                     }
                 }
-                catch (Exception ex)
+                else
                 {
-                    MessageBox.Show("Error al cargar los datos desde el archivo XML: " + ex.Message);
+                    this.bolsaDeProductos = new Bolsa();
+
+                    using (XmlTextWriter writer = new XmlTextWriter(rutaArchivo, Encoding.UTF8))
+                    {
+                        XmlSerializer ser = new XmlSerializer(typeof(Bolsa));
+                        ser.Serialize(writer, bolsaDeProductos);
+                    }
+
+                    throw new ArchivoDesconocidoException();
                 }
             }
+            // EXCEPCION PERSONALIZADA //
+            catch (ArchivoDesconocidoException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            // EXCEPCION GENERAL //
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al cargar los datos desde el archivo XML: {ex.Message}");
+            }
+
             ActualizarVisor();
         }
 
