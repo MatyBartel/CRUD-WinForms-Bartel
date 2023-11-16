@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="Entidades.Bolsa">
+    <Position X="11.5" Y="1.75" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAABAAQAAQAEAAAAAABAAAAAAAAAAAAAAAiA=</HashCode>
+      <FileName>Bolsa.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Entidades.Computadora">
+    <Position X="0.5" Y="6.5" Width="5.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgKAAAAAAAAAAEgAAQgAAAAAAAAAAAAABAAAAAAAA=</HashCode>
+      <FileName>Computadora.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Entidades.Consola">
+    <Position X="12" Y="6.5" Width="5.75" />
+    <TypeIdentifier>
+      <HashCode>AIAAIAAAAAAAAAAEgAAQiAAAAAAAAAAAAABAAAAAAAA=</HashCode>
+      <FileName>Consola.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Entidades.Electronica">
+    <Position X="6.75" Y="1" Width="4.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAQAACEgAAQgAAAAAAAAIAAAABAAAAAAiA=</HashCode>
+      <FileName>Electronica.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Entidades.Telefono">
+    <Position X="6.25" Y="6.5" Width="5.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAAAAEgAAQgAAAAAAAAAAAAAAAAAAIAIA=</HashCode>
+      <FileName>Telefono.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="Entidades.EMarcas">
+    <Position X="4.75" Y="2.25" Width="1.25" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAAAIABABAAAAIAAAAAAEAAAAAAAAAAEAA=</HashCode>
+      <FileName>EMarcas.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

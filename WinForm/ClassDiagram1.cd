@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="WinFormApp.FrmCRUD">
+    <Position X="5" Y="0.5" Width="4.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgABCKAABgAAACAIBACCABgAAAAAJBAIAAAqIA=</HashCode>
+      <FileName>FrmCRUD.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WinFormApp.FrmInicio">
+    <Position X="1.25" Y="0.5" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIACCCAEABAAAACAAAACAAAAAQQAACAAEAAAAAA=</HashCode>
+      <FileName>FrmInicio.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WinFormApp.FrmProducto">
+    <Position X="10" Y="0.5" Width="4.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAACBAAJgABAiAAAgKASBQAAAAAAAAAIAAEAA=</HashCode>
+      <FileName>FrmProducto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WinFormApp.Usuario">
+    <Position X="15" Y="3.25" Width="4.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAQJAACAAAAAAAAAAAAAAACAAAAQAAAAAAA=</HashCode>
+      <FileName>Usuario.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WinForm.Program">
+    <Position X="15" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
