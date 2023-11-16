@@ -14,8 +14,8 @@ Espero esto cumpla con las condiciones de los profesores. desde ya, Muchas Graci
 Diagrama de clases:
 
 
-![ClassDiagram1](https://github.com/MatyBartel/Bartel.Matias.SegundoParcial/assets/133682242/aa846db7-c02c-439f-9d6f-967577101db4)
+![ClassDiagram1](https://github.com/MatyBartel/Bartel.Matias.SegundoParcial/assets/133682242/694c8655-fe66-4319-a4f7-041dbfa3057a)
 
 
 
-![ClassDiagram1_1](https://github.com/MatyBartel/Bartel.Matias.SegundoParcial/assets/133682242/a5c8669c-d5bb-4b64-bc11-85b0f3f79258)
+![ClassDiagram1_1](https://github.com/MatyBartel/Bartel.Matias.SegundoParcial/assets/133682242/5a96ddac-acf1-48ae-ae06-c2b88681ddad)
