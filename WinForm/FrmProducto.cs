@@ -130,42 +130,45 @@ namespace WinFormApp
         private void btnAceptar_Click(object sender, EventArgs e)
         {
             #region Validaciones
-            string nombre = this.txtNombre.Text;
-            string nombreMarca = this.cmbMarca.SelectedItem?.ToString();
-            EMarcas marca;
-            string atributo1 = txtAtributo1.Text;
-            string atributo2 = txtAtributo2.Text;
-            int stock;
-            if (string.IsNullOrEmpty(nombreMarca) || !Enum.TryParse(nombreMarca, out marca))
+            try
             {
-                MessageBox.Show("ERROR. Asegúrate de seleccionar una marca válida.");
-            }
-            else if (!int.TryParse(this.txtStock.Text, out stock))
-            {
-                MessageBox.Show("ERROR. Asegúrate de ingresar un valor numérico en Stock.");
-            }
-            else if (cmbProductos.SelectedIndex == 0 && !int.TryParse(txtAtributo2.Text, out _))
-            {
-                MessageBox.Show("ERROR. Asegúrate de ingresar un valor numérico en Memoria RAM.");
-            }
-            else if (cmbProductos.SelectedIndex == 2 && !int.TryParse(txtAtributo2.Text, out _))
-            {
-                MessageBox.Show("ERROR. Asegúrate de ingresar un valor numérico en Almacenamiento.");
-            }
-            else if (int.TryParse(nombre, out _))
-            {
-                MessageBox.Show("ERROR. Asegúrate de ingresar una cadena en Nombre.");
-            }
-            else if (string.IsNullOrEmpty(atributo1))
-            {
-                MessageBox.Show("ERROR. Asegúrate de ingresar valores en todos los campos.");
-            }
-            else if (string.IsNullOrEmpty(atributo2))
-            {
-                MessageBox.Show("ERROR. Asegúrate de ingresar valores en todos los campos.");
-            }
-            else
-            {
+                string nombre = this.txtNombre.Text;
+                string nombreMarca = this.cmbMarca.SelectedItem?.ToString();
+                EMarcas marca;
+                string atributo1 = txtAtributo1.Text;
+                string atributo2 = txtAtributo2.Text;
+                int stock;
+
+                if (string.IsNullOrEmpty(nombreMarca) || !Enum.TryParse(nombreMarca, out marca))
+                {
+                    throw new Exception("Asegúrate de seleccionar una marca.");
+                }
+
+                if (!int.TryParse(this.txtStock.Text, out stock))
+                {
+                    throw new Exception("Asegúrate de ingresar un valor numérico en Stock.");
+                }
+
+                if (cmbProductos.SelectedIndex == 0 && !int.TryParse(txtAtributo2.Text, out _))
+                {
+                    throw new Exception("Asegúrate de ingresar un valor numérico en Memoria RAM.");
+                }
+
+                if (cmbProductos.SelectedIndex == 2 && !int.TryParse(txtAtributo2.Text, out _))
+                {
+                    throw new Exception("Asegúrate de ingresar un valor numérico en Almacenamiento.");
+                }
+
+                if (int.TryParse(nombre, out _))
+                {
+                    throw new Exception("Asegúrate de ingresar una Nombre valido.");
+                }
+
+                if (string.IsNullOrEmpty(atributo1) || string.IsNullOrEmpty(atributo2))
+                {
+                    throw new Exception("Asegúrate de ingresar valores en todos los campos.");
+                }
+
                 if (productoAEditar == null)
                 {
                     Electronica nuevoProducto = null;
@@ -184,7 +187,7 @@ namespace WinFormApp
                     }
                     else if (cmbIndice == -1)
                     {
-                        MessageBox.Show("ERROR. Tipo de producto no seleccionado.");
+                        throw new Exception("Tipo de producto no seleccionado.");
                     }
 
                     if (nuevoProducto != null)
@@ -194,7 +197,7 @@ namespace WinFormApp
                     }
                     else
                     {
-                        MessageBox.Show("ERROR. Asegúrese de seleccionar un tipo válido.");
+                        throw new Exception("Asegúrate de seleccionar un tipo válido.");
                     }
                 }
                 else
@@ -229,7 +232,10 @@ namespace WinFormApp
 
                     this.DialogResult = DialogResult.OK;
                 }
-
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("ERROR: " + ex.Message);
             }
             #endregion
 
