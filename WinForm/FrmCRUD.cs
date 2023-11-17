@@ -129,14 +129,13 @@ namespace WinFormApp
         /// </summary>
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            int selectedIndex = lstVisor.SelectedIndex;
-
-            if (selectedIndex >= 0 && selectedIndex < bolsa.productos.Count)
+            try
             {
+                int selectedIndex = lstVisor.SelectedIndex;
                 bolsa.productos.RemoveAt(selectedIndex);
                 ActualizarVisor();
             }
-            else
+            catch (ArgumentOutOfRangeException)
             {
                 MessageBox.Show("Por favor, seleccione un producto para eliminar.");
             }
