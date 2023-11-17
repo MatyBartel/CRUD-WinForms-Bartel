@@ -263,11 +263,6 @@ namespace WinFormApp
             {
                 MessageBox.Show(ex.Message);
             }
-            // EXCEPCION GENERAL //
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error al cargar los datos desde el archivo XML: {ex.Message}");
-            }
 
             ActualizarVisor();
         }
