@@ -14,6 +14,7 @@ namespace WinFormApp
     public partial class FrmProducto : Form
     {
         #region Atributos
+        public event EventHandler<DatosEventArgs> DatosIncompletos;
         /// <summary>
         /// Atributo del form principal.
         /// </summary>
@@ -161,10 +162,10 @@ namespace WinFormApp
 
                 if (int.TryParse(nombre, out _))
                 {
-                    throw new Exception("Asegúrate de ingresar una Nombre valido.");
+                    throw new Exception("Asegúrate de ingresar un Nombre valido.");
                 }
 
-                if (string.IsNullOrEmpty(atributo1) || string.IsNullOrEmpty(atributo2))
+                if (string.IsNullOrEmpty(atributo1) || string.IsNullOrEmpty(atributo2) || string.IsNullOrEmpty(nombre))
                 {
                     throw new Exception("Asegúrate de ingresar valores en todos los campos.");
                 }
@@ -235,7 +236,7 @@ namespace WinFormApp
             }
             catch (Exception ex)
             {
-                MessageBox.Show("ERROR: " + ex.Message);
+                RellenarDatosIncompletos(ex.Message);
             }
             #endregion
 
@@ -247,6 +248,30 @@ namespace WinFormApp
         {
             this.DialogResult = DialogResult.Cancel;
         }
-        #endregion
+
+        private void RellenarDatosIncompletos(string mensaje)
+        {
+            DatosIncompletos?.Invoke(this, new DatosEventArgs(mensaje));
+
+            MessageBox.Show($"Error de autenticación: {mensaje}");
+
+            if (string.IsNullOrEmpty(txtAtributo2.Text))
+            {
+                txtAtributo2.Text = "COMPLETAR";
+            }
+            if (string.IsNullOrEmpty(txtAtributo1.Text))
+            {
+                txtAtributo1.Text = "COMPLETAR";
+            }
+            if (string.IsNullOrEmpty(txtNombre.Text))
+            {
+                txtNombre.Text = "COMPLETAR";
+            }
+            if (string.IsNullOrEmpty(txtStock.Text))
+            {
+                txtStock.Text = "COMPLETAR";
+            }
+        }
     }
 }
+        #endregion
