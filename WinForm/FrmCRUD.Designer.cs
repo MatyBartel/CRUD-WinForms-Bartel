@@ -38,6 +38,7 @@
             cmbAscDesc = new ComboBox();
             label2 = new Label();
             lblUsuarioLog = new Label();
+            btnLimpiar = new Button();
             SuspendLayout();
             // 
             // lstVisor
@@ -137,12 +138,23 @@
             lblUsuarioLog.TabIndex = 9;
             lblUsuarioLog.Text = "label3";
             // 
+            // btnLimpiar
+            // 
+            btnLimpiar.Location = new Point(761, 184);
+            btnLimpiar.Name = "btnLimpiar";
+            btnLimpiar.Size = new Size(108, 29);
+            btnLimpiar.TabIndex = 10;
+            btnLimpiar.Text = "LIMPIAR";
+            btnLimpiar.UseVisualStyleBackColor = true;
+            btnLimpiar.Click += btnLimpiar_Click;
+            // 
             // FrmCRUD
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ButtonHighlight;
-            ClientSize = new Size(881, 387);
+            ClientSize = new Size(880, 362);
+            Controls.Add(btnLimpiar);
             Controls.Add(lblUsuarioLog);
             Controls.Add(label2);
             Controls.Add(cmbAscDesc);
@@ -174,5 +186,6 @@
         private ComboBox cmbAscDesc;
         private Label label2;
         private Label lblUsuarioLog;
+        private Button btnLimpiar;
     }
 }

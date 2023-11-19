@@ -292,6 +292,22 @@ namespace WinFormApp
                 btnEliminar.Enabled = false;
             }
         }
+
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            LimpiarDatos();
+        }
+
+        public void LimpiarDatos()
+        {
+            DialogResult resultado = MessageBox.Show("¿Estás seguro de que deseas eliminar todos los productos?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (resultado == DialogResult.Yes)
+            {
+                bolsa.productos.Clear();
+            }
+            ActualizarVisor();
+        }
     }
     #endregion
 }

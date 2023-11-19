@@ -101,7 +101,7 @@
             Controls.Add(txtPass);
             Controls.Add(txtCorreo);
             Name = "FrmInicio";
-            Text = "Form1";
+            Text = "INICIO";
             ResumeLayout(false);
             PerformLayout();
         }

@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace WinFormApp
 {
-    public partial class FrmProducto : Form
+    public partial class FrmProducto : Form,ILimpiador
     {
         #region Atributos
         public event EventHandler<DatosEventArgs> InformacionProductoEliminada;
@@ -274,7 +274,7 @@ namespace WinFormApp
             }
         }
 
-        private void btnLimpiar_Click(object sender, EventArgs e)
+        public void LimpiarDatos()
         {
             txtStock.Text = "";
             txtNombre.Text = "";
@@ -283,7 +283,10 @@ namespace WinFormApp
             txtAtributo2.Text = "";
             cmbMarca.SelectedIndex = -1;
             cmbProductos.SelectedIndex = -1;
-
+        }
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            LimpiarDatos();
             AvisoInformacionProductoEliminada("La información del producto fue eliminada.");
         }
         protected virtual void AvisoInformacionProductoEliminada(string mensaje)
