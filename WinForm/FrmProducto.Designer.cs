@@ -43,6 +43,7 @@
             lblAtributo1 = new Label();
             lblAtributo2 = new Label();
             cmbMarca = new ComboBox();
+            btnLimpiar = new Button();
             SuspendLayout();
             // 
             // btnAceptar
@@ -179,11 +180,22 @@
             cmbMarca.Size = new Size(302, 23);
             cmbMarca.TabIndex = 21;
             // 
+            // btnLimpiar
+            // 
+            btnLimpiar.Location = new Point(327, 12);
+            btnLimpiar.Name = "btnLimpiar";
+            btnLimpiar.Size = new Size(72, 23);
+            btnLimpiar.TabIndex = 22;
+            btnLimpiar.Text = "LIMPIAR";
+            btnLimpiar.UseVisualStyleBackColor = true;
+            btnLimpiar.Click += btnLimpiar_Click;
+            // 
             // FrmProducto
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(411, 451);
+            Controls.Add(btnLimpiar);
             Controls.Add(cmbMarca);
             Controls.Add(lblAtributo2);
             Controls.Add(lblAtributo1);
@@ -221,5 +233,6 @@
         private Label lblAtributo1;
         private Label lblAtributo2;
         private ComboBox cmbMarca;
+        private Button btnLimpiar;
     }
 }

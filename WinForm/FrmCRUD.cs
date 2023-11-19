@@ -132,6 +132,7 @@ namespace WinFormApp
             try
             {
                 int selectedIndex = lstVisor.SelectedIndex;
+
                 bolsa.productos.RemoveAt(selectedIndex);
                 ActualizarVisor();
             }

@@ -14,6 +14,7 @@ namespace WinFormApp
     public partial class FrmProducto : Form
     {
         #region Atributos
+        public event EventHandler<DatosEventArgs> InformacionProductoEliminada;
         public event EventHandler<DatosEventArgs> DatosIncompletos;
         /// <summary>
         /// Atributo del form principal.
@@ -272,6 +273,25 @@ namespace WinFormApp
                 txtStock.Text = "COMPLETAR";
             }
         }
+
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            txtStock.Text = "";
+            txtNombre.Text = "";
+            txtStock.Text = "";
+            txtAtributo1.Text = "";
+            txtAtributo2.Text = "";
+            cmbMarca.SelectedIndex = -1;
+            cmbProductos.SelectedIndex = -1;
+
+            AvisoInformacionProductoEliminada("La información del producto fue eliminada.");
+        }
+        protected virtual void AvisoInformacionProductoEliminada(string mensaje)
+        {
+            InformacionProductoEliminada?.Invoke(this, new DatosEventArgs(mensaje));
+            MessageBox.Show(mensaje, "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        #endregion
     }
 }
-        #endregion
