@@ -21,6 +21,9 @@ namespace Entidades
         /// Representa el modelo del telefono  EJ: S23 Plus
         /// </summary>
         public string modelo;
+
+        public string tipo;
+
         #endregion
 
         #region Constructores
@@ -29,6 +32,7 @@ namespace Entidades
         /// </summary>
         public Telefono()
         {
+            this.tipo = "TELEFONO";
             this.pantalla = "Ninguna";
             this.modelo = "Ninguno";
         }
@@ -41,8 +45,14 @@ namespace Entidades
             this.modelo = modelo;
         }
 
+        public Telefono(string pantalla, string modelo,string tipo) : this(pantalla,modelo)
+        {
+            this.tipo = tipo;
+        }
+
         public Telefono(string nombre, int stock, EMarcas marca) : base(nombre, stock, marca)
         {
+            this.tipo = "TELEFONO";
             this.pantalla = "Ninguna";
             this.modelo = "Ninguno";
         }
@@ -56,6 +66,11 @@ namespace Entidades
         public Telefono(string nombre, int stock, EMarcas marca, string pantalla, string modelo) : this(nombre, stock, marca, pantalla)
         {
             this.modelo = modelo;
+        }
+
+        public Telefono(string nombre, int stock, EMarcas marca, string pantalla, string modelo,string tipo) : this(nombre, stock, marca, pantalla,modelo)
+        {
+            this.tipo = tipo;
         }
         #endregion
 
@@ -93,6 +108,13 @@ namespace Entidades
                 return false; // No hay suficientes
             }
         }
+
+        public override string InsertarDatoTabla()
+        {
+            return "insert into tabla_crud(tipo, nombre, marca, stock, caracteristica1, caracteristica2) values('" + this.tipo + "', '" + this.nombre + "', '" + this.marca + "', " + this.stock + ", '" + this.pantalla + "', '" + this.modelo + "')";
+        }
+
+
         #endregion
 
         #region Sobrecarga

@@ -36,6 +36,10 @@ namespace WinFormApp
         private Usuario usuarioActual;
 
         private string rutaArchivo = @"..\..\..\archivo.xml";
+
+        public bool ordenar = false;
+
+        public AccesoTabla accesoTabla = new AccesoTabla();
         #endregion
 
         #region Constructor
@@ -60,6 +64,11 @@ namespace WinFormApp
         private void ActualizarVisor()
         {
             this.lstVisor.Items.Clear();
+
+            if (!this.ordenar)
+            {
+                bolsaDeProductos.productos = this.accesoTabla.ObtenerListaDatos();
+            }
             foreach (Electronica producto in bolsaDeProductos.productos)
             {
                 lstVisor.Items.Add(producto.ToString());
@@ -97,6 +106,7 @@ namespace WinFormApp
 
                     if (resultado == DialogResult.OK)
                     {
+                        this.accesoTabla.ModificarDato(productoSeleccionado);
                         ActualizarVisor();
                     }
                 }
@@ -108,6 +118,7 @@ namespace WinFormApp
 
                     if (resultado == DialogResult.OK)
                     {
+                        this.accesoTabla.ModificarDato(productoSeleccionado);
                         ActualizarVisor();
                     }
                 }
@@ -119,6 +130,8 @@ namespace WinFormApp
 
                     if (resultado == DialogResult.OK)
                     {
+                        this.accesoTabla.ModificarDato(productoSeleccionado);
+
                         ActualizarVisor();
                     }
                 }

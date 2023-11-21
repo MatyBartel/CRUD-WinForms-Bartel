@@ -25,6 +25,9 @@ namespace Entidades
         /// Establece la marca del producto electrónico.
         /// </summary>
         public EMarcas marca;
+
+        public int id;
+
         #endregion
 
         #region Constructores
@@ -83,6 +86,8 @@ namespace Entidades
         public abstract bool ComprobarDisponibilidad();
 
         public abstract bool ComprobarDisponibilidad(int cantidadMinima);
+
+        public abstract string InsertarDatoTabla();
 
         #endregion
 

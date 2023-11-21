@@ -23,6 +23,8 @@ namespace Entidades
         /// Establece el almacenamiento de la consola
         /// </summary>
         public int almacenamiento;
+
+        public string tipo;
         #endregion
 
         #region Constructores
@@ -31,6 +33,7 @@ namespace Entidades
         /// </summary>
         public Consola() : base()
         {
+            this.tipo = "CONSOLA";
             this.generacion = "Sin Generacion";
             this.almacenamiento = 0;
         }
@@ -43,8 +46,14 @@ namespace Entidades
             this.almacenamiento = almacenamiento;
         }
 
+        public Consola(string generacion, int almacenamiento,string tipo) : this(generacion,almacenamiento)
+        {
+            this.tipo = tipo;
+        }
+
         public Consola(string nombre, int stock, EMarcas marca) : base(nombre, stock, marca)
         {
+            this.tipo = "CONSOLA";
             this.generacion = "Sin Generacion";
             this.almacenamiento = 0;
         }
@@ -52,12 +61,17 @@ namespace Entidades
         {
             this.generacion = generacion;
         }
-        /// <summary>
-        /// Constructor con todos los parametros de la actual y la base.
-        /// </summary>
         public Consola(string nombre, int stock, EMarcas marca, string generacion, int almacenamiento) : this(nombre, stock, marca, generacion)
         {
             this.almacenamiento = almacenamiento;
+        }
+
+        /// <summary>
+        /// Constructor con todos los parametros de la actual y la base.
+        /// </summary>
+        public Consola(string nombre, int stock, EMarcas marca, string generacion, int almacenamiento, string tipo) : this(nombre, stock, marca, generacion,almacenamiento)
+        {
+            this.tipo = tipo;
         }
         #endregion
 
@@ -122,6 +136,11 @@ namespace Entidades
         public static implicit operator int(Consola c)
         {
             return c.almacenamiento;
+        }
+
+        public override string InsertarDatoTabla()
+        {
+            return "insert into tabla_crud(tipo, nombre, marca, stock, caracteristica1, caracteristica2) values('" + this.tipo + "', '" + this.nombre + "', '" + this.marca + "', " + this.stock + ", '" + this.generacion + "', '" + this.almacenamiento.ToString() + "')";
         }
         #endregion
     }

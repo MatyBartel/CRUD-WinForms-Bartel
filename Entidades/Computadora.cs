@@ -20,6 +20,8 @@ namespace Entidades
         /// Establece la memoria Ram de la computadora
         /// </summary>
         public int memoriaRam;
+
+        public string tipo;
         #endregion
 
         #region Constructores
@@ -28,6 +30,7 @@ namespace Entidades
         /// </summary>
         public Computadora() : base()
         {
+            this.tipo = "COMPUTADORA";
             this.grafica = "Integrada";
             this.memoriaRam = 0;
         }
@@ -39,8 +42,13 @@ namespace Entidades
         {
             this.memoriaRam = memoriaRam;
         }
+        public Computadora(string grafica, int memoriaRam, string tipo) : this(grafica,memoriaRam)
+        {
+            this.tipo = tipo;
+        }
         public Computadora(string nombre,int stock,EMarcas marca ) : base(nombre,stock,marca)
         {
+            this.tipo = "COMPUTADORA";
             this.grafica = "Integrada";
             this.memoriaRam = 0;
         }
@@ -48,15 +56,18 @@ namespace Entidades
         {
             this.grafica = grafica;
         }
-        /// <summary>
-        /// Constructor con todos los parametros de la base y la actual
-        /// </summary>
         public Computadora(string nombre, int stock, EMarcas marca, string grafica,int memoriaRam) : this(nombre, stock, marca,grafica)
         {
             this.memoriaRam=memoriaRam;
         }
 
-
+        /// <summary>
+        /// Constructor con todos los parametros de la base y la actual
+        /// </summary>
+        public Computadora(string nombre, int stock, EMarcas marca, string grafica, int memoriaRam, string tipo) : this(nombre, stock, marca, grafica, memoriaRam)
+        {
+            this.tipo = tipo;
+        }
         #endregion
 
         #region Metodos
@@ -92,6 +103,11 @@ namespace Entidades
             {
                 return false; // No hay suficientes
             }
+        }
+
+        public override string InsertarDatoTabla()
+        {
+            return "insert into tabla_crud(tipo, nombre, marca, stock, caracteristica1, caracteristica2) values('" + this.tipo + "', '" + this.nombre + "', '" + this.marca + "', " + this.stock + ", '" + this.grafica + "', '" + this.memoriaRam.ToString() + "')";
         }
         #endregion
 

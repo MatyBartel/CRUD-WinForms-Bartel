@@ -28,7 +28,8 @@ namespace Entidades
         /// </summary>
         public List<Electronica> productos
         {
-            get { return elementos; }
+            get { return this.elementos; }
+            set {  this.elementos = value; }
         }
 
         #endregion

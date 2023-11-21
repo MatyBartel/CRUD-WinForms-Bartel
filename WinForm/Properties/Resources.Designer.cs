@@ -61,7 +61,7 @@ namespace WinFormApp.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Data Source=localhost\SQLEXPRESS;Initial Catalog=crud_db;Integrated Security=True;Trust Server Certificate=True.
+        ///   Busca una cadena traducida similar a Data Source=localhost\SQLEXPRESS;Initial Catalog=bolsa_db;Integrated Security=True;Trust Server Certificate=True.
         /// </summary>
         internal static string miConexion {
             get {

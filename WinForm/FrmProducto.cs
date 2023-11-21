@@ -140,6 +140,7 @@ namespace WinFormApp
                 string atributo1 = txtAtributo1.Text;
                 string atributo2 = txtAtributo2.Text;
                 int stock;
+                string tipo;
 
                 if (string.IsNullOrEmpty(nombreMarca) || !Enum.TryParse(nombreMarca, out marca))
                 {
@@ -177,15 +178,18 @@ namespace WinFormApp
                     int cmbIndice = cmbProductos.SelectedIndex;
                     if (cmbIndice == 0)
                     {
-                        nuevoProducto = new Computadora(nombre, stock, marca, atributo1, int.Parse(atributo2));
+                        tipo = "COMPUTADORA";
+                        nuevoProducto = new Computadora(nombre, stock, marca, atributo1, int.Parse(atributo2),tipo);
                     }
                     else if (cmbIndice == 1)
                     {
-                        nuevoProducto = new Telefono(nombre, stock, marca, atributo1, atributo2);
+                        tipo = "TELEFONO";
+                        nuevoProducto = new Telefono(nombre, stock, marca, atributo1, atributo2,tipo);
                     }
                     else if (cmbIndice == 2)
                     {
-                        nuevoProducto = new Consola(nombre, stock, marca, atributo1, int.Parse(atributo2));
+                        tipo = "CONSOLA";
+                        nuevoProducto = new Consola(nombre, stock, marca, atributo1, int.Parse(atributo2),tipo);
                     }
                     else if (cmbIndice == -1)
                     {
@@ -195,6 +199,7 @@ namespace WinFormApp
                     if (nuevoProducto != null)
                     {
                         frmCRUD.bolsa += nuevoProducto;
+                        frmCRUD.accesoTabla.AgregarDato(nuevoProducto);
                         this.DialogResult = DialogResult.OK;
                     }
                     else
