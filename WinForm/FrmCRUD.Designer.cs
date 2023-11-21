@@ -48,12 +48,12 @@
             lstVisor.ItemHeight = 15;
             lstVisor.Location = new Point(17, 12);
             lstVisor.Name = "lstVisor";
-            lstVisor.Size = new Size(738, 274);
+            lstVisor.Size = new Size(674, 274);
             lstVisor.TabIndex = 0;
             // 
             // btnEliminar
             // 
-            btnEliminar.Location = new Point(601, 292);
+            btnEliminar.Location = new Point(537, 292);
             btnEliminar.Name = "btnEliminar";
             btnEliminar.Size = new Size(154, 56);
             btnEliminar.TabIndex = 1;
@@ -73,7 +73,7 @@
             // 
             // btnModificar
             // 
-            btnModificar.Location = new Point(306, 292);
+            btnModificar.Location = new Point(267, 292);
             btnModificar.Name = "btnModificar";
             btnModificar.Size = new Size(154, 56);
             btnModificar.TabIndex = 3;
@@ -83,7 +83,7 @@
             // 
             // btnOrdenarStock
             // 
-            btnOrdenarStock.Location = new Point(761, 48);
+            btnOrdenarStock.Location = new Point(709, 30);
             btnOrdenarStock.Name = "btnOrdenarStock";
             btnOrdenarStock.Size = new Size(175, 23);
             btnOrdenarStock.TabIndex = 4;
@@ -94,7 +94,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(761, 30);
+            label1.Location = new Point(709, 12);
             label1.Name = "label1";
             label1.Size = new Size(90, 15);
             label1.TabIndex = 5;
@@ -102,7 +102,7 @@
             // 
             // btnOrdenarNombre
             // 
-            btnOrdenarNombre.Location = new Point(761, 77);
+            btnOrdenarNombre.Location = new Point(709, 59);
             btnOrdenarNombre.Name = "btnOrdenarNombre";
             btnOrdenarNombre.Size = new Size(175, 23);
             btnOrdenarNombre.TabIndex = 6;
@@ -116,7 +116,7 @@
             cmbAscDesc.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbAscDesc.FormattingEnabled = true;
             cmbAscDesc.Items.AddRange(new object[] { "Ascendente", "Descendente" });
-            cmbAscDesc.Location = new Point(761, 131);
+            cmbAscDesc.Location = new Point(709, 131);
             cmbAscDesc.Name = "cmbAscDesc";
             cmbAscDesc.Size = new Size(175, 23);
             cmbAscDesc.TabIndex = 7;
@@ -124,7 +124,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(761, 113);
+            label2.Location = new Point(709, 113);
             label2.Name = "label2";
             label2.Size = new Size(51, 15);
             label2.TabIndex = 8;
@@ -135,13 +135,13 @@
             lblUsuarioLog.AutoSize = true;
             lblUsuarioLog.Location = new Point(12, 363);
             lblUsuarioLog.Name = "lblUsuarioLog";
-            lblUsuarioLog.Size = new Size(38, 15);
+            lblUsuarioLog.Size = new Size(46, 15);
             lblUsuarioLog.TabIndex = 9;
-            lblUsuarioLog.Text = "label3";
+            lblUsuarioLog.Text = "usuario";
             // 
             // btnLimpiar
             // 
-            btnLimpiar.Location = new Point(798, 181);
+            btnLimpiar.Location = new Point(743, 179);
             btnLimpiar.Name = "btnLimpiar";
             btnLimpiar.Size = new Size(108, 29);
             btnLimpiar.TabIndex = 10;
@@ -152,18 +152,18 @@
             // lblReloj
             // 
             lblReloj.AutoSize = true;
-            lblReloj.Location = new Point(854, 363);
+            lblReloj.Location = new Point(768, 363);
             lblReloj.Name = "lblReloj";
-            lblReloj.Size = new Size(38, 15);
+            lblReloj.Size = new Size(31, 15);
             lblReloj.TabIndex = 11;
-            lblReloj.Text = "label3";
+            lblReloj.Text = "hora";
             // 
             // FrmCRUD
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ButtonHighlight;
-            ClientSize = new Size(948, 392);
+            ClientSize = new Size(894, 392);
             Controls.Add(lblReloj);
             Controls.Add(btnLimpiar);
             Controls.Add(lblUsuarioLog);
@@ -178,7 +178,7 @@
             Controls.Add(lstVisor);
             FormBorderStyle = FormBorderStyle.SizableToolWindow;
             Name = "FrmCRUD";
-            Text = "App";
+            Text = "APP";
             FormClosing += FrmCRUD_FormClosing;
             Load += FrmCRUD_Load;
             ResumeLayout(false);

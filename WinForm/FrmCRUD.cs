@@ -16,10 +16,12 @@ namespace WinFormApp
     /// <summary>
     /// FormCRUD que contendra una lista con los productos y podra ordenarlos modificarlos eliminarlos etc.
     /// </summary>
+    public delegate void DelegadoActualizar(DateTime fecha);
     public partial class FrmCRUD : Form
     {
         #region Atributos y Propiedades
-
+        private CancellationToken cancelarFlujo;
+        private CancellationTokenSource fuenteDeCancelacion;
         /// <summary>
         /// Lista de productos de la clase de coleccion.
         /// </summary>
@@ -50,10 +52,12 @@ namespace WinFormApp
         public FrmCRUD(Usuario usuario)
         {
             InitializeComponent();
+            this.fuenteDeCancelacion = new CancellationTokenSource();
+            this.cancelarFlujo = this.fuenteDeCancelacion.Token;
             this.StartPosition = FormStartPosition.CenterScreen;
             this.usuarioActual = usuario;
             bolsaDeProductos = new Bolsa();
-            lblUsuarioLog.Text = "Usuario: " + usuario.nombre + " - Fecha: " + DateTime.Now.ToString("dd/MM/yyyy");
+            lblUsuarioLog.Text = "Usuario: " + usuario.nombre;
             ConfigurarInterfazSegunPerfil();
         }
         #endregion
@@ -210,7 +214,7 @@ namespace WinFormApp
             if (ordenSeleccionado == "Ascendente")
             {
                 this.flagOrdenar = true;
-                bolsa.Ordenar(e => e.nombre,true);
+                bolsa.Ordenar(e => e.nombre, true);
             }
             else if (ordenSeleccionado == "Descendente")
             {
@@ -243,7 +247,7 @@ namespace WinFormApp
                 {
                     e.Cancel = true;
                 }
-
+                this.fuenteDeCancelacion.Cancel();
                 cerrarAplicacion = true;
                 Application.Exit();
             }
@@ -256,6 +260,7 @@ namespace WinFormApp
 
             try
             {
+                Task t1 = Task.Run(() => { this.BucleTiempo(); });
                 if (File.Exists(rutaArchivo))
                 {
                     using (XmlTextReader reader = new XmlTextReader(rutaArchivo))
@@ -332,6 +337,30 @@ namespace WinFormApp
                 }
             }
             ActualizarVisor();
+        }
+
+        private void ActualizarFecha(DateTime fecha)
+        {
+            if (this.lblReloj.InvokeRequired)
+            {
+                DelegadoActualizar d = new DelegadoActualizar(ActualizarFecha);
+                object[] arrayParametro = { fecha };
+
+                this.lblReloj.Invoke(d, arrayParametro);
+
+            }
+            else this.lblReloj.Text = fecha.ToString();
+        }
+
+        private void BucleTiempo()
+        {
+            do
+            {
+                if (this.cancelarFlujo.IsCancellationRequested) break;
+
+                this.ActualizarFecha(DateTime.Now);
+                Thread.Sleep(1000);
+            } while (true);
         }
 
     }

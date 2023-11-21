@@ -212,7 +212,7 @@
             Controls.Add(btnCancelar);
             Controls.Add(btnAceptar);
             Name = "FrmProducto";
-            Text = "FrmProducto";
+            Text = "PRODUCTO";
             ResumeLayout(false);
             PerformLayout();
         }
