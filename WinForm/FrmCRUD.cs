@@ -37,7 +37,7 @@ namespace WinFormApp
 
         private string rutaArchivo = @"..\..\..\archivo.xml";
 
-        public bool ordenar = false;
+        public bool flagOrdenar = false;
 
         public AccesoTabla accesoTabla = new AccesoTabla();
         #endregion
@@ -65,7 +65,7 @@ namespace WinFormApp
         {
             this.lstVisor.Items.Clear();
 
-            if (!this.ordenar)
+            if (!this.flagOrdenar)
             {
                 bolsaDeProductos.productos = this.accesoTabla.ObtenerListaDatos();
             }
@@ -175,10 +175,12 @@ namespace WinFormApp
 
             if (ordenSeleccionado == "Ascendente")
             {
+                this.flagOrdenar = true;
                 bolsa.OrdenarProductosPorStock();
             }
             else if (ordenSeleccionado == "Descendente")
             {
+                this.flagOrdenar = true;
                 bolsa.OrdenarProductosPorStock(true);
             }
 
@@ -205,10 +207,12 @@ namespace WinFormApp
 
             if (ordenSeleccionado == "Ascendente")
             {
+                this.flagOrdenar = true;
                 bolsa.OrdenarPorNombre();
             }
             else if (ordenSeleccionado == "Descendente")
             {
+                this.flagOrdenar = true;
                 bolsa.OrdenarPorNombre(true);
             }
 

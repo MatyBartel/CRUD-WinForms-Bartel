@@ -14,8 +14,10 @@ namespace WinFormApp
     public partial class FrmProducto : Form,ILimpiador
     {
         #region Atributos
-        public event EventHandler<DatosEventArgs> InformacionProductoEliminada;
-        public event EventHandler<DatosEventArgs> DatosIncompletos;
+        public delegate void DatosIncompletosEventHandler(object sender, DatosEventArgs e);
+        public delegate void InformacionProductoEliminadaEventHandler(object sender, DatosEventArgs e);
+        public event InformacionProductoEliminadaEventHandler InformacionProductoEliminada;
+        public event DatosIncompletosEventHandler DatosIncompletos;
         /// <summary>
         /// Atributo del form principal.
         /// </summary>
@@ -257,7 +259,11 @@ namespace WinFormApp
 
         private void RellenarDatosIncompletos(string mensaje)
         {
-            DatosIncompletos?.Invoke(this, new DatosEventArgs(mensaje));
+            if (DatosIncompletos != null)
+            {
+                DatosEventArgs eventArgs = new DatosEventArgs(mensaje);
+                DatosIncompletos(this, eventArgs);
+            }
 
             MessageBox.Show($"Error de autenticación: {mensaje}");
 
@@ -296,7 +302,12 @@ namespace WinFormApp
         }
         protected virtual void AvisoInformacionProductoEliminada(string mensaje)
         {
-            InformacionProductoEliminada?.Invoke(this, new DatosEventArgs(mensaje));
+            if (InformacionProductoEliminada != null)
+            {
+                DatosEventArgs eventArgs = new DatosEventArgs(mensaje);
+                InformacionProductoEliminada(this, eventArgs);
+            }
+
             MessageBox.Show(mensaje, "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 

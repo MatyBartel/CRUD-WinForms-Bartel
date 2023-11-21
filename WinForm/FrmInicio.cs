@@ -17,7 +17,8 @@ namespace WinFormApp
     public partial class FrmInicio : Form
     {
         #region Atributos
-        public event EventHandler<DatosEventArgs> AutenticacionFallida;
+        public delegate void AutenticacionFallidaEventHandler(object sender, DatosEventArgs e);
+        public event AutenticacionFallidaEventHandler AutenticacionFallida;
         /// <summary>
         /// Atributo de usuario privado para que no se pueda acceder.
         /// </summary>
@@ -95,7 +96,11 @@ namespace WinFormApp
 
         private void AutenticacionUsuarioFallida(string mensaje)
         {
-            AutenticacionFallida?.Invoke(this, new DatosEventArgs(mensaje));
+            if (AutenticacionFallida != null)
+            {
+                DatosEventArgs eventArgs = new DatosEventArgs(mensaje);
+                AutenticacionFallida(this, eventArgs);
+            }
 
             MessageBox.Show($"Error de autenticación: {mensaje}");
             this.txtCorreo.Text = string.Empty;
