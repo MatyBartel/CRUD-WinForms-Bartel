@@ -193,7 +193,6 @@
             FormBorderStyle = FormBorderStyle.SizableToolWindow;
             Name = "FrmCRUD";
             Text = "APP";
-            TransparencyKey = Color.Transparent;
             FormClosing += FrmCRUD_FormClosing;
             Load += FrmCRUD_Load;
             ResumeLayout(false);
