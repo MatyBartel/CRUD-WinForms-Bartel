@@ -39,6 +39,7 @@
             label2 = new Label();
             lblUsuarioLog = new Label();
             btnLimpiar = new Button();
+            lblReloj = new Label();
             SuspendLayout();
             // 
             // lstVisor
@@ -84,7 +85,7 @@
             // 
             btnOrdenarStock.Location = new Point(761, 48);
             btnOrdenarStock.Name = "btnOrdenarStock";
-            btnOrdenarStock.Size = new Size(108, 23);
+            btnOrdenarStock.Size = new Size(175, 23);
             btnOrdenarStock.TabIndex = 4;
             btnOrdenarStock.Text = "Stock";
             btnOrdenarStock.UseVisualStyleBackColor = true;
@@ -103,7 +104,7 @@
             // 
             btnOrdenarNombre.Location = new Point(761, 77);
             btnOrdenarNombre.Name = "btnOrdenarNombre";
-            btnOrdenarNombre.Size = new Size(108, 23);
+            btnOrdenarNombre.Size = new Size(175, 23);
             btnOrdenarNombre.TabIndex = 6;
             btnOrdenarNombre.Text = "Nombre";
             btnOrdenarNombre.UseVisualStyleBackColor = true;
@@ -117,7 +118,7 @@
             cmbAscDesc.Items.AddRange(new object[] { "Ascendente", "Descendente" });
             cmbAscDesc.Location = new Point(761, 131);
             cmbAscDesc.Name = "cmbAscDesc";
-            cmbAscDesc.Size = new Size(108, 23);
+            cmbAscDesc.Size = new Size(175, 23);
             cmbAscDesc.TabIndex = 7;
             // 
             // label2
@@ -140,7 +141,7 @@
             // 
             // btnLimpiar
             // 
-            btnLimpiar.Location = new Point(761, 184);
+            btnLimpiar.Location = new Point(798, 181);
             btnLimpiar.Name = "btnLimpiar";
             btnLimpiar.Size = new Size(108, 29);
             btnLimpiar.TabIndex = 10;
@@ -148,12 +149,22 @@
             btnLimpiar.UseVisualStyleBackColor = true;
             btnLimpiar.Click += btnLimpiar_Click;
             // 
+            // lblReloj
+            // 
+            lblReloj.AutoSize = true;
+            lblReloj.Location = new Point(854, 363);
+            lblReloj.Name = "lblReloj";
+            lblReloj.Size = new Size(38, 15);
+            lblReloj.TabIndex = 11;
+            lblReloj.Text = "label3";
+            // 
             // FrmCRUD
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ButtonHighlight;
-            ClientSize = new Size(880, 362);
+            ClientSize = new Size(948, 392);
+            Controls.Add(lblReloj);
             Controls.Add(btnLimpiar);
             Controls.Add(lblUsuarioLog);
             Controls.Add(label2);
@@ -187,5 +198,6 @@
         private Label label2;
         private Label lblUsuarioLog;
         private Button btnLimpiar;
+        private Label lblReloj;
     }
 }

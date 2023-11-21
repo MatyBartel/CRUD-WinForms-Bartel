@@ -19,6 +19,9 @@ namespace WinFormApp
     public partial class FrmCRUD : Form
     {
         #region Atributos y Propiedades
+        private System.Windows.Forms.Timer timer;
+        private DateTime tiempoInicio;
+
         /// <summary>
         /// Lista de productos de la clase de coleccion.
         /// </summary>
@@ -49,6 +52,11 @@ namespace WinFormApp
         public FrmCRUD(Usuario usuario)
         {
             InitializeComponent();
+            timer = new System.Windows.Forms.Timer();
+            timer.Interval = 1000; 
+            timer.Tick += Timer_Tick;
+            tiempoInicio = DateTime.Now;
+            timer.Start();
             this.StartPosition = FormStartPosition.CenterScreen;
             this.usuarioActual = usuario;
             bolsaDeProductos = new Bolsa();
@@ -147,6 +155,7 @@ namespace WinFormApp
                 int selectedIndex = lstVisor.SelectedIndex;
 
                 bolsa.productos.RemoveAt(selectedIndex);
+                this.accesoTabla.EliminarDato(selectedIndex);
                 ActualizarVisor();
             }
             catch (ArgumentOutOfRangeException)
@@ -242,8 +251,8 @@ namespace WinFormApp
                     e.Cancel = true;
                 }
 
+                timer.Stop();
                 cerrarAplicacion = true;
-
                 Application.Exit();
             }
         }
@@ -324,6 +333,12 @@ namespace WinFormApp
                 bolsa.productos.Clear();
             }
             ActualizarVisor();
+        }
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            TimeSpan tiempoTranscurrido = DateTime.Now - tiempoInicio;
+            lblReloj.Text = tiempoTranscurrido.ToString(@"hh\:mm\:ss");
         }
     }
     #endregion

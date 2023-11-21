@@ -193,6 +193,38 @@ namespace WinFormApp
                 }
             }
             return retorno;
-        } 
+        }
+
+        public bool EliminarDato(int id)
+        {
+            bool retorno = false;
+            try
+            {
+                this.comando = new SqlCommand();
+                this.comando.Parameters.AddWithValue("@id", id);
+                this.comando.CommandType = System.Data.CommandType.Text;
+                this.comando.CommandText = "DELETE FROM tabla_crud WHERE id = @id";
+                this.comando.Connection = this.conexion;
+
+                this.conexion.Open();
+
+                int filasAfectadas = this.comando.ExecuteNonQuery();
+                if (filasAfectadas == 1)
+                    retorno = true;
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                if (this.conexion.State == System.Data.ConnectionState.Open)
+                {
+                    this.conexion.Close();
+                }
+            }
+            return retorno;
+        }
+
     }
 }
