@@ -138,6 +138,12 @@ namespace Entidades
             return p1.nombre == p2.nombre && p1.marca == p2.marca && p1.stock == p2.stock;
         }
 
+        /// <summary>
+        /// Sobrecarga del operador '!=' para verificar si dos productos electrónicos no son iguales.
+        /// </summary>
+        /// <param name="p1">Primer producto electrónico a comparar.</param>
+        /// <param name="p2">Segundo producto electrónico a comparar.</param>
+        /// <returns>Verdadero si los productos electrónicos no son iguales, falso en caso contrario.</returns>
         public static bool operator !=(Electronica p1, Electronica p2)
         {
             return !(p1 == p2);
