@@ -26,6 +26,9 @@ namespace Entidades
         /// </summary>
         public EMarcas marca;
 
+        /// <summary>
+        /// Establece el ID del producto electrónico.
+        /// </summary>
         public int id;
 
         #endregion
@@ -42,12 +45,10 @@ namespace Entidades
                this.stock = 0;
             }
 
-
         public Electronica(string nombre) : this()
             {
                 this.nombre = nombre;
             }
-
 
         public Electronica(string nombre, int stock) : this(nombre)
             {
@@ -85,8 +86,14 @@ namespace Entidades
         /// </summary>
         public abstract bool ComprobarDisponibilidad();
 
+        /// <summary>
+        /// Metodo abstracto para comprobar el disponibilidad
+        /// </summary>
         public abstract bool ComprobarDisponibilidad(int cantidadMinima);
 
+        /// <summary>
+        /// Metodo abstracto para Insertar los datos en la Tabla SQL
+        /// </summary>
         public abstract string InsertarDatoTabla();
 
         #endregion

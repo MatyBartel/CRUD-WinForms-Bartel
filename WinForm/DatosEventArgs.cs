@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace WinFormApp
 {
+    /// <summary>
+    /// Clase de evento heredada de EventArgs
+    /// </summary>
     public class DatosEventArgs<T> : EventArgs
     {
         public T Datos { get; }

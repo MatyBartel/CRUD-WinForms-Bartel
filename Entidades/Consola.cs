@@ -23,7 +23,9 @@ namespace Entidades
         /// Establece el almacenamiento de la consola
         /// </summary>
         public int almacenamiento;
-
+        /// <summary>
+        /// Establece el tipo de producto, siempre sera CONSOLA.
+        /// </summary>
         public string tipo;
         #endregion
 
@@ -137,7 +139,9 @@ namespace Entidades
         {
             return c.almacenamiento;
         }
-
+        /// <summary>
+        /// Sobrecarga de metodo InsertarDatoTabla para SQL a la hora de insertar los datos de este tipo.
+        /// </summary>
         public override string InsertarDatoTabla()
         {
             return "insert into tabla_crud(tipo, nombre, marca, stock, caracteristica1, caracteristica2) values('" + this.tipo + "', '" + this.nombre + "', '" + this.marca + "', " + this.stock + ", '" + this.generacion + "', '" + this.almacenamiento.ToString() + "')";

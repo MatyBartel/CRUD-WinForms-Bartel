@@ -10,23 +10,39 @@ using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Serialization;
 using Entidades;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.VisualBasic.Logging;
 
 namespace WinFormApp
 {
+    
+    /// <summary>
+    /// Delegado que actualizara la fecha de mi FrmCRUD
+    /// </summary>
+    public delegate void DelegadoActualizar(DateTime fecha);
+
     /// <summary>
     /// FormCRUD que contendra una lista con los productos y podra ordenarlos modificarlos eliminarlos etc.
     /// </summary>
-    public delegate void DelegadoActualizar(DateTime fecha);
-    public partial class FrmCRUD : Form
+    public partial class FrmCRUD : Form,ILimpiador,IDeshacerCambios
     {
         #region Atributos y Propiedades
+        /// <summary>
+        /// Variable donde guardare mi producto eliminado para asi hacer uso de este para retornarlo si se desea.
+        /// </summary>
+        private Electronica productoEliminado;
+        /// <summary>
+        /// Representa una solicitud de cancelación. Se utiliza para notificar a los hilos o tareas que deben interrumpir su trabajo.
+        /// </summary>
         private CancellationToken cancelarFlujo;
+        /// <summary>
+        /// Proporciona un objeto que se puede utilizar para emitir solicitudes de cancelación a uno o más objetos CancellationToken.
+        /// </summary>
         private CancellationTokenSource fuenteDeCancelacion;
         /// <summary>
         /// Lista de productos de la clase de coleccion.
         /// </summary>
         private Bolsa bolsaDeProductos;
-
         /// <summary>
         /// Proporciona acceso a la bolsa de productos electrónicos.
         /// </summary>
@@ -35,13 +51,23 @@ namespace WinFormApp
             get { return bolsaDeProductos; }
             set { bolsaDeProductos = value; }
         }
-
+        /// <summary>
+        /// Usuario que esta usando la app.
+        /// </summary>
         private Usuario usuarioActual;
-
+        /// <summary>
+        /// Ruta en donde se serializara y deserializaran los datos.
+        /// </summary>
         private string rutaArchivo = @"..\..\..\archivo.xml";
 
+        /// <summary>
+        /// Flag para alternar asi se puede ordenar los datos.
+        /// </summary>
         public bool flagOrdenar = false;
 
+        /// <summary>
+        /// Acceso a la tabla de mi Base de Datos.
+        /// </summary>
         public AccesoTabla accesoTabla = new AccesoTabla();
         #endregion
 
@@ -58,6 +84,8 @@ namespace WinFormApp
             this.usuarioActual = usuario;
             bolsaDeProductos = new Bolsa();
             lblUsuarioLog.Text = "Usuario: " + usuario.nombre;
+            btnDeshacerCambios.Enabled = false;
+
             ConfigurarInterfazSegunPerfil();
         }
         #endregion
@@ -150,9 +178,11 @@ namespace WinFormApp
             try
             {
                 int selectedIndex = lstVisor.SelectedIndex;
-
+                productoEliminado = bolsa.productos[selectedIndex];
                 this.accesoTabla.EliminarDato(this.bolsaDeProductos.productos[selectedIndex].id);
                 bolsa.productos.RemoveAt(selectedIndex);
+                btnDeshacerCambios.Enabled = true;
+
                 ActualizarVisor();
             }
             catch (ArgumentOutOfRangeException)
@@ -224,11 +254,14 @@ namespace WinFormApp
 
             ActualizarVisor();
         }
+
+        /// <summary>
+        /// Flag para cerrar la APP y que no se ejecute dos veces un mensaje.
+        /// </summary>
+        private bool cerrarAplicacion = false;
         /// <summary>
         /// Metodo para cerrar el form y serializar al cerrar.
         /// </summary>
-        private bool cerrarAplicacion = false;
-
         private void FrmCRUD_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (!cerrarAplicacion)
@@ -253,7 +286,7 @@ namespace WinFormApp
             }
         }
         /// <summary>
-        /// Metodo para al abrir el form deserializar el archivo.
+        /// Metodo para al abrir el form y deserializar el archivo. Uso de excepcion personalizada.
         /// </summary>
         private void FrmCRUD_Load(object sender, EventArgs e)
         {
@@ -290,7 +323,9 @@ namespace WinFormApp
 
             ActualizarVisor();
         }
-
+        /// <summary>
+        /// Metodo para configurar las posibilidades de uso segun el perfil del usuario. Se inabilitan los usos de los botones.
+        /// </summary>
         private void ConfigurarInterfazSegunPerfil()
         {
             if (usuarioActual.perfil == "administrador")
@@ -306,6 +341,8 @@ namespace WinFormApp
                 btnAgregar.Enabled = true;
                 btnModificar.Enabled = true;
                 btnEliminar.Enabled = false;
+                btnLimpiar.Enabled = false;
+                btnDeshacerCambios.Enabled = false;
             }
             else if (usuarioActual.perfil == "vendedor")
             {
@@ -313,32 +350,40 @@ namespace WinFormApp
                 btnAgregar.Enabled = false;
                 btnModificar.Enabled = false;
                 btnEliminar.Enabled = false;
+                btnLimpiar.Enabled = false;
+                btnDeshacerCambios.Enabled = false;
             }
         }
 
+        /// <summary>
+        /// Boton que usa un metodo de una Interfaz para borrar todo el listado de productos.
+        /// </summary>
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
-            LimpiarDatos<Electronica>();
+            LimpiarDatos();
         }
 
-        public void LimpiarDatos<T>()
+        /// <summary>
+        /// Metodo para borrar todos los elementos del tipo que se le asigne "T" en el CRUD.
+        /// </summary>
+        public void LimpiarDatos()
         {
-            DialogResult resultado = MessageBox.Show($"¿Estás seguro de que deseas eliminar todos los {typeof(T).Name}?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult resultado = MessageBox.Show($"¿Estás seguro de que deseas eliminar todos los elementos? No se podra reestablecer.", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (resultado == DialogResult.Yes)
             {
                 foreach (var producto in bolsa.productos.ToList())
                 {
-                    if (producto is T)
-                    {
-                        this.accesoTabla.EliminarDato(producto.id);
-                        bolsa.productos.Remove(producto);
-                    }
+                    this.accesoTabla.EliminarDato(producto.id);
+                    bolsa.productos.Remove(producto);
                 }
             }
             ActualizarVisor();
         }
 
+        /// <summary>
+        /// Metodo que actualiza la fecha.
+        /// </summary>
         private void ActualizarFecha(DateTime fecha)
         {
             if (this.lblReloj.InvokeRequired)
@@ -352,6 +397,9 @@ namespace WinFormApp
             else this.lblReloj.Text = fecha.ToString();
         }
 
+        /// <summary>
+        /// Metodo que tiene el bucle Do While de mi Reloj que actualiza la fecha.
+        /// </summary>
         private void BucleTiempo()
         {
             do
@@ -363,6 +411,28 @@ namespace WinFormApp
             } while (true);
         }
 
-    }
+
+        private void btnDeshacerCambios_Click(object sender, EventArgs e)
+        {
+            if (productoEliminado != null)
+            {
+                DeshacerCambios();
+            }
+            else
+            {
+                btnDeshacerCambios.Enabled = false;
+            }
+        }
+
+        public void DeshacerCambios()
+        {
+            bolsa.productos.Add(productoEliminado);
+            accesoTabla.AgregarDato(productoEliminado);
+            ActualizarVisor();
+
+            productoEliminado = null;
+            btnDeshacerCambios.Enabled = false;
+        }
     #endregion
+    }
 }

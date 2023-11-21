@@ -11,12 +11,27 @@ using System.Windows.Forms;
 
 namespace WinFormApp
 {
+    /// <summary>
+    /// Clase Form del Producto que deriva de la interfaz ya que se implementara codigo de esta.
+    /// </summary>
     public partial class FrmProducto : Form,ILimpiador
     {
         #region Atributos
+        /// <summary>
+        /// Delegado que se utilizara para un evento que mostrara un mensaje y rellenara los datos incompletos al agregar.
+        /// </summary>
         public delegate void DatosIncompletosEventHandler(object sender, DatosEventArgs<string> e);
+        /// <summary>
+        /// Delegado que se utiliza para un evento que eliminar la informacion.
+        /// </summary>
         public delegate void InformacionProductoEliminadaEventHandler(object sender, DatosEventArgs<string> e);
+        /// <summary>
+        /// Evento InformacionProductoEliminada que disparara el delegado
+        /// </summary>
         public event InformacionProductoEliminadaEventHandler InformacionProductoEliminada;
+        /// <summary>
+        /// Evento DatosIncompletos que disparara el delegado
+        /// </summary>
         public event DatosIncompletosEventHandler DatosIncompletos;
         /// <summary>
         /// Atributo del form principal.
@@ -26,6 +41,8 @@ namespace WinFormApp
         /// Atributo para editar un producto.
         /// </summary>
         private Electronica productoAEditar;
+
+
         #endregion
 
         #region Constructores
@@ -130,6 +147,7 @@ namespace WinFormApp
 
         /// <summary>
         /// Funcion para que al aceptar valide los datos tomados se compare si este se esta editando o no, si no se esta editando se crea un nuevo, si no se sobreescriben los datos.
+        /// Si los datos no estan completos disparara el metodo para rellenar lo que falte completar.
         /// </summary>
         private void btnAceptar_Click(object sender, EventArgs e)
         {
@@ -208,7 +226,6 @@ namespace WinFormApp
                         }
                         else
                         {
-                            // Mostrar un mensaje indicando que el producto ya existe
                             MessageBox.Show("El producto ya existe en la bolsa.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
@@ -265,6 +282,10 @@ namespace WinFormApp
             this.DialogResult = DialogResult.Cancel;
         }
 
+        /// <summary>
+        /// Metodo que rellena los datos que estan incompletos en el Form del Crud.
+        /// Utiliza el evento para mmostrar el mensaje.
+        /// </summary>
         private void RellenarDatosIncompletos(string mensaje)
         {
             if (DatosIncompletos != null)
@@ -292,7 +313,9 @@ namespace WinFormApp
                 txtStock.Text = "COMPLETAR";
             }
         }
-
+        /// <summary>
+        /// Metodo limpiar datos que borra todos los datos.
+        /// </summary>
         public void LimpiarDatos()
         {
             txtStock.Text = "";
@@ -303,11 +326,17 @@ namespace WinFormApp
             cmbMarca.SelectedIndex = -1;
             cmbProductos.SelectedIndex = -1;
         }
+        /// <summary>
+        /// Boton para limmpiar que utiliza mi metodo para eliminar todos los datos y usa el metodo para aletar de esto.
+        /// </summary>
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
             LimpiarDatos();
             AvisoInformacionProductoEliminada("La información del producto fue eliminada.");
         }
+        /// <summary>
+        /// Metodo que avisa el borrado de datos utilizando mi evento.
+        /// </summary>
         protected virtual void AvisoInformacionProductoEliminada(string mensaje)
         {
             if (InformacionProductoEliminada != null)
@@ -318,7 +347,6 @@ namespace WinFormApp
 
             MessageBox.Show(mensaje, "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
-
         #endregion
     }
 }

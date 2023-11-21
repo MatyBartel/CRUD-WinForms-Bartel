@@ -105,6 +105,9 @@ namespace Entidades
             }
         }
 
+        /// <summary>
+        /// Sobrecarga de metodo InsertarDatoTabla para SQL a la hora de insertar los datos de este tipo.
+        /// </summary>
         public override string InsertarDatoTabla()
         {
             return "insert into tabla_crud(tipo, nombre, marca, stock, caracteristica1, caracteristica2) values('" + this.tipo + "', '" + this.nombre + "', '" + this.marca + "', " + this.stock + ", '" + this.grafica + "', '" + this.memoriaRam.ToString() + "')";

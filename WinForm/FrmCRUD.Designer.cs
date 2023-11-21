@@ -40,6 +40,7 @@
             lblUsuarioLog = new Label();
             btnLimpiar = new Button();
             lblReloj = new Label();
+            btnDeshacerCambios = new Button();
             SuspendLayout();
             // 
             // lstVisor
@@ -73,7 +74,7 @@
             // 
             // btnModificar
             // 
-            btnModificar.Location = new Point(267, 292);
+            btnModificar.Location = new Point(289, 292);
             btnModificar.Name = "btnModificar";
             btnModificar.Size = new Size(154, 56);
             btnModificar.TabIndex = 3;
@@ -141,7 +142,7 @@
             // 
             // btnLimpiar
             // 
-            btnLimpiar.Location = new Point(743, 179);
+            btnLimpiar.Location = new Point(740, 199);
             btnLimpiar.Name = "btnLimpiar";
             btnLimpiar.Size = new Size(108, 29);
             btnLimpiar.TabIndex = 10;
@@ -158,12 +159,24 @@
             lblReloj.TabIndex = 11;
             lblReloj.Text = "hora";
             // 
+            // btnDeshacerCambios
+            // 
+            btnDeshacerCambios.Font = new Font("Segoe UI", 6.75F, FontStyle.Regular, GraphicsUnit.Point);
+            btnDeshacerCambios.Location = new Point(567, 354);
+            btnDeshacerCambios.Name = "btnDeshacerCambios";
+            btnDeshacerCambios.Size = new Size(99, 24);
+            btnDeshacerCambios.TabIndex = 12;
+            btnDeshacerCambios.Text = "DESHACER CAMBIOS";
+            btnDeshacerCambios.UseVisualStyleBackColor = true;
+            btnDeshacerCambios.Click += btnDeshacerCambios_Click;
+            // 
             // FrmCRUD
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = SystemColors.ButtonHighlight;
+            BackColor = SystemColors.ButtonFace;
             ClientSize = new Size(894, 392);
+            Controls.Add(btnDeshacerCambios);
             Controls.Add(lblReloj);
             Controls.Add(btnLimpiar);
             Controls.Add(lblUsuarioLog);
@@ -176,9 +189,11 @@
             Controls.Add(btnAgregar);
             Controls.Add(btnEliminar);
             Controls.Add(lstVisor);
+            ForeColor = SystemColors.ControlText;
             FormBorderStyle = FormBorderStyle.SizableToolWindow;
             Name = "FrmCRUD";
             Text = "APP";
+            TransparencyKey = Color.Transparent;
             FormClosing += FrmCRUD_FormClosing;
             Load += FrmCRUD_Load;
             ResumeLayout(false);
@@ -199,5 +214,6 @@
         private Label lblUsuarioLog;
         private Button btnLimpiar;
         private Label lblReloj;
+        private Button btnDeshacerCambios;
     }
 }

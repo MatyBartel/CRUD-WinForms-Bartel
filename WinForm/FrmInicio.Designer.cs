@@ -38,22 +38,22 @@
             // 
             // txtCorreo
             // 
-            txtCorreo.Location = new Point(12, 100);
+            txtCorreo.Location = new Point(18, 100);
             txtCorreo.Name = "txtCorreo";
-            txtCorreo.Size = new Size(222, 23);
+            txtCorreo.Size = new Size(237, 23);
             txtCorreo.TabIndex = 0;
             // 
             // txtPass
             // 
-            txtPass.Location = new Point(12, 152);
+            txtPass.Location = new Point(18, 152);
             txtPass.Name = "txtPass";
             txtPass.PasswordChar = '*';
-            txtPass.Size = new Size(222, 23);
+            txtPass.Size = new Size(237, 23);
             txtPass.TabIndex = 1;
             // 
             // btnIniciar
             // 
-            btnIniciar.Location = new Point(49, 192);
+            btnIniciar.Location = new Point(62, 192);
             btnIniciar.Name = "btnIniciar";
             btnIniciar.Size = new Size(149, 49);
             btnIniciar.TabIndex = 2;
@@ -64,7 +64,7 @@
             // lblCorreo
             // 
             lblCorreo.AutoSize = true;
-            lblCorreo.Location = new Point(12, 82);
+            lblCorreo.Location = new Point(18, 82);
             lblCorreo.Name = "lblCorreo";
             lblCorreo.Size = new Size(46, 15);
             lblCorreo.TabIndex = 3;
@@ -73,7 +73,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(12, 134);
+            label1.Location = new Point(18, 134);
             label1.Name = "label1";
             label1.Size = new Size(70, 15);
             label1.TabIndex = 4;
@@ -83,7 +83,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            label2.Location = new Point(28, 36);
+            label2.Location = new Point(41, 36);
             label2.Name = "label2";
             label2.Size = new Size(190, 25);
             label2.TabIndex = 5;
@@ -93,7 +93,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(246, 271);
+            ClientSize = new Size(273, 256);
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(lblCorreo);

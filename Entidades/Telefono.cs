@@ -22,6 +22,9 @@ namespace Entidades
         /// </summary>
         public string modelo;
 
+        /// <summary>
+        /// Representa el tipo del producto electronico, en este caso siempre TELEFONO.
+        /// </summary>
         public string tipo;
 
         #endregion
@@ -60,14 +63,13 @@ namespace Entidades
         {
             this.pantalla = pantalla;
         }
-        /// <summary>
-        /// Constructor con todos los parametros de la base y la actual.
-        /// </summary>
         public Telefono(string nombre, int stock, EMarcas marca, string pantalla, string modelo) : this(nombre, stock, marca, pantalla)
         {
             this.modelo = modelo;
         }
-
+        /// <summary>
+        /// Constructor con todos los parametros de la base y la actual.
+        /// </summary>
         public Telefono(string nombre, int stock, EMarcas marca, string pantalla, string modelo,string tipo) : this(nombre, stock, marca, pantalla,modelo)
         {
             this.tipo = tipo;
@@ -109,12 +111,13 @@ namespace Entidades
             }
         }
 
+        /// <summary>
+        /// Sobrecarga de metodo para Insertar los datos en la Tabla SQL.
+        /// </summary>
         public override string InsertarDatoTabla()
         {
             return "insert into tabla_crud(tipo, nombre, marca, stock, caracteristica1, caracteristica2) values('" + this.tipo + "', '" + this.nombre + "', '" + this.marca + "', " + this.stock + ", '" + this.pantalla + "', '" + this.modelo + "')";
         }
-
-
         #endregion
 
         #region Sobrecarga

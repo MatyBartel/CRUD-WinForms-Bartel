@@ -17,13 +17,21 @@ namespace WinFormApp
     public partial class FrmInicio : Form
     {
         #region Atributos
+        /// <summary>
+        /// Delegado conectado con DatosEventArgs.
+        /// </summary>
         public delegate void AutenticacionFallidaEventHandler(object sender, DatosEventArgs<string> e);
+        /// <summary>
+        /// Evento AutenticacionFallida.
+        /// </summary>
         public event AutenticacionFallidaEventHandler AutenticacionFallida;
         /// <summary>
         /// Atributo de usuario privado para que no se pueda acceder.
         /// </summary>
         private Usuario usuario;
-
+        /// <summary>
+        /// Propiedad que obtiene el objeto Usuario asociado al formulario.
+        /// </summary>
         public Usuario UsuarioDelForm
         {
             get { return this.usuario; }
@@ -76,7 +84,9 @@ namespace WinFormApp
 
             return rta;
         }
-
+        /// <summary>
+        /// Boton iniciar sesion que me dara la bienvenida si es correcto y si usara mi evento.
+        /// </summary>
         private void btnIniciar_Click(object sender, EventArgs e)
         {
             Usuario usuarioAutenticado = this.Verificar();
@@ -94,6 +104,9 @@ namespace WinFormApp
             }
         }
 
+        /// <summary>
+        /// Metodo que usara mi evento para hacer un mensaje al haber un error de inicio de sesion y borrar los datos ingresados.
+        /// </summary>
         private void AutenticacionUsuarioFallida(string mensaje)
         {
             if (AutenticacionFallida != null)

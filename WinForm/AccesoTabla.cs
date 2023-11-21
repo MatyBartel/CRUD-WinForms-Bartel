@@ -7,25 +7,47 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace WinFormApp
-{
+{    
+    /// <summary>
+    /// Clase publica para acceder ya sea eliminando,agregando o modificando datos de mi tabla SQL
+    /// </summary>
     public class AccesoTabla
     {
+        #region Atributos
+        /// <summary>
+        /// Contiene CLAVE para la base de datos.
+        /// </summary>
         private SqlConnection conexion;
+        /// <summary>
+        /// String privado de que contiene la clave de conexion para la base de datos.
+        /// </summary>
         private static string cadena_conexion;
+        /// <summary>
+        /// Se utilizara para ejecutar comandos de tipo SQL COMMAND.
+        /// </summary>
         private SqlCommand comando;
+        /// <summary>
+        /// Se utilizara para leer variables y agregarlos y demas en la tabla.
+        /// </summary>
         private SqlDataReader lector;
 
+        #endregion
 
+        #region Constructor
         static AccesoTabla()
         {
             AccesoTabla.cadena_conexion = Properties.Resources.miConexion;
         }
-
         public AccesoTabla()
         {
             this.conexion = new SqlConnection(AccesoTabla.cadena_conexion);
         }
+        #endregion
 
+        #region Metodos
+        /// <summary>
+        /// Metodo publico que obtendra los datos de la tabla de mi Base de Datos.
+        /// </summary>
         public List<Electronica> ObtenerListaDatos()
         {
             List<Electronica> lista = new List<Electronica>();
@@ -107,6 +129,9 @@ namespace WinFormApp
             return lista;
         }
 
+        /// <summary>
+        /// Metodo publico que agregara el producto "d" a mi base de datos desde mi CRUD.
+        /// </summary>
         public bool AgregarDato(Electronica d)
         {
             bool retorno = false;
@@ -139,6 +164,9 @@ namespace WinFormApp
             return retorno;
         }
 
+        /// <summary>
+        /// Metodo publico que modificara los datos del producto "d" mi base de datos desde mi CRUD
+        /// </summary>
         public bool ModificarDato(Electronica d)
         {
             bool retorno = false;
@@ -195,6 +223,9 @@ namespace WinFormApp
             return retorno;
         }
 
+        /// <summary>
+        /// Metodo publico que eliminara "d" de mi base de datos leyendo desde mi CRUD.
+        /// </summary>
         public bool EliminarDato(int id)
         {
             bool retorno = false;
@@ -225,6 +256,6 @@ namespace WinFormApp
             }
             return retorno;
         }
-
+        #endregion
     }
 }

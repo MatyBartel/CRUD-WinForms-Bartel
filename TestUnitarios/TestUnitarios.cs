@@ -4,10 +4,16 @@ using System.Reflection;
 
 namespace TestUnitarios
 {
-
+    /// <summary>
+    /// Clase publica para hacer Test Unitarios del proyecto.
+    /// </summary>
     [TestClass]
     public class TestUnitarios
     {
+        #region TEST BOLSA
+        /// <summary>
+        /// Metodo que comprueba si se esta agregando el producto a la lista. Devolveria TRUE si esto sucede ya que pertenece a la lista.
+        /// </summary>
         [TestMethod]
         public void AgregarElemento()
         {
@@ -30,6 +36,9 @@ namespace TestUnitarios
             Assert.IsTrue(bolsa.productos.Contains(computadora));
         }
 
+        /// <summary>
+        /// Metodo que comprueba si se esta eliminando el producto a la lista. Devolveria FALSE si esto sucede ya que no pertenece a la lista.
+        /// </summary>
         [TestMethod]
         public void EliminarElemento()
         {
@@ -54,22 +63,12 @@ namespace TestUnitarios
             Assert.IsFalse(bolsa.productos.Contains(consola));
             Assert.IsFalse(bolsa.productos.Contains(computadora));
         }
+        #endregion
 
-
-        [TestMethod]
-        public void VerificarIgualdad_Telefono()
-        {
-            // Arrange
-            Electronica telefono1 = new Telefono("iPhone", 20, EMarcas.Apple, "OLED", "7 Plus");
-            Electronica telefono2 = new Telefono("iPhone", 20, EMarcas.Apple, "OLED", "7 Plus");
-
-            // Act
-            bool resultado = telefono1 == telefono2;
-
-            // Assert
-            Assert.IsTrue(resultado);
-        }
-
+        #region TEST COMPUTADORA
+        /// <summary>
+        /// Metodo que comprueba si dos objetos son iguales de tipo COMPUTADORA, devolveria TRUE ya que el operador == realiza esta verificacion.
+        /// </summary>
         [TestMethod]
         public void VerificarIgualdad_Computadora()
         {
@@ -84,20 +83,9 @@ namespace TestUnitarios
             Assert.IsTrue(resultado);
         }
 
-        [TestMethod]
-        public void VerificarIgualdad_Consola()
-        {
-            // Arrange
-            Electronica consola1 = new Consola("Playstation", 50, EMarcas.Sony, "5th", 10000);
-            Electronica consola2 = new Consola("Playstation", 50, EMarcas.Sony, "5th", 10000);
-
-            // Act
-            bool resultado = consola1 == consola2;
-
-            // Assert
-            Assert.IsTrue(resultado);
-        }
-
+        /// <summary>
+        /// Metodo que comprueba si dos objetos son distintos de tipo COMPUTADORA, devolveria TRUE ya que el operador != realiza esta verificacion.
+        /// </summary>
         [TestMethod]
         public void VerificarDesigualdad_Computadora()
         {
@@ -111,21 +99,29 @@ namespace TestUnitarios
             // Assert
             Assert.IsTrue(resultado);
         }
+        #endregion
 
+        #region TEST TELEFONO
+        /// <summary>
+        /// Metodo que comprueba si dos objetos son iguales de tipo TELEFONO, devolveria TRUE ya que el operador == realiza esta verificacion.
+        /// </summary>
         [TestMethod]
-        public void VerificarDesigualdad_Consola()
+        public void VerificarIgualdad_Telefono()
         {
             // Arrange
-            Electronica consola1 = new Consola("Playstation", 50, EMarcas.Sony, "5th", 10000);
-            Electronica consola2 = new Consola("XBOX", 10, EMarcas.Microsoft, "360", 500);
+            Electronica telefono1 = new Telefono("iPhone", 20, EMarcas.Apple, "OLED", "7 Plus");
+            Electronica telefono2 = new Telefono("iPhone", 20, EMarcas.Apple, "OLED", "7 Plus");
 
             // Act
-            bool resultado = consola1 != consola2;
+            bool resultado = telefono1 == telefono2;
 
             // Assert
             Assert.IsTrue(resultado);
         }
 
+        /// <summary>
+        /// Metodo que comprueba si dos objetos son distintos de tipo TELEFONO, devolveria TRUE ya que el operador != realiza esta verificacion.
+        /// </summary>
         [TestMethod]
         public void VerificarDesigualdad_Telefono()
         {
@@ -139,6 +135,41 @@ namespace TestUnitarios
             // Assert
             Assert.IsTrue(resultado);
         }
+        #endregion
 
+        #region TEST CONSOLA
+        /// <summary>
+        /// Metodo que comprueba si dos objetos son iguales de tipo CONSOLA, devolveria TRUE ya que el operador == realiza esta verificacion.
+        /// </summary>
+        [TestMethod]
+        public void VerificarIgualdad_Consola()
+        {
+            // Arrange
+            Electronica consola1 = new Consola("Playstation", 50, EMarcas.Sony, "5th", 10000);
+            Electronica consola2 = new Consola("Playstation", 50, EMarcas.Sony, "5th", 10000);
+
+            // Act
+            bool resultado = consola1 == consola2;
+
+            // Assert
+            Assert.IsTrue(resultado);
+        }
+        /// <summary>
+        /// Metodo que comprueba si dos objetos son distintos de tipo CONSOLA, devolveria TRUE ya que el operador != realiza esta verificacion.
+        /// </summary>
+        [TestMethod]
+        public void VerificarDesigualdad_Consola()
+        {
+            // Arrange
+            Electronica consola1 = new Consola("Playstation", 50, EMarcas.Sony, "5th", 10000);
+            Electronica consola2 = new Consola("XBOX", 10, EMarcas.Microsoft, "360", 500);
+
+            // Act
+            bool resultado = consola1 != consola2;
+
+            // Assert
+            Assert.IsTrue(resultado);
+        }
+        #endregion
     }
 }
