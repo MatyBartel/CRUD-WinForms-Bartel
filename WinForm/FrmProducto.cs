@@ -14,8 +14,8 @@ namespace WinFormApp
     public partial class FrmProducto : Form,ILimpiador
     {
         #region Atributos
-        public delegate void DatosIncompletosEventHandler(object sender, DatosEventArgs e);
-        public delegate void InformacionProductoEliminadaEventHandler(object sender, DatosEventArgs e);
+        public delegate void DatosIncompletosEventHandler(object sender, DatosEventArgs<string> e);
+        public delegate void InformacionProductoEliminadaEventHandler(object sender, DatosEventArgs<string> e);
         public event InformacionProductoEliminadaEventHandler InformacionProductoEliminada;
         public event DatosIncompletosEventHandler DatosIncompletos;
         /// <summary>
@@ -200,9 +200,17 @@ namespace WinFormApp
 
                     if (nuevoProducto != null)
                     {
-                        frmCRUD.bolsa += nuevoProducto;
-                        frmCRUD.accesoTabla.AgregarDato(nuevoProducto);
-                        this.DialogResult = DialogResult.OK;
+                        if(!frmCRUD.bolsa.productos.Contains(nuevoProducto))
+                        {
+                            frmCRUD.bolsa += nuevoProducto;
+                            frmCRUD.accesoTabla.AgregarDato(nuevoProducto);
+                            this.DialogResult = DialogResult.OK;
+                        }
+                        else
+                        {
+                            // Mostrar un mensaje indicando que el producto ya existe
+                            MessageBox.Show("El producto ya existe en la bolsa.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
                     }
                     else
                     {
@@ -261,11 +269,11 @@ namespace WinFormApp
         {
             if (DatosIncompletos != null)
             {
-                DatosEventArgs eventArgs = new DatosEventArgs(mensaje);
+                DatosEventArgs<string> eventArgs = new DatosEventArgs<string>(mensaje);
                 DatosIncompletos(this, eventArgs);
             }
 
-            MessageBox.Show($"Error de autenticación: {mensaje}");
+            MessageBox.Show($"Error: {mensaje}");
 
             if (string.IsNullOrEmpty(txtAtributo2.Text))
             {
@@ -304,7 +312,7 @@ namespace WinFormApp
         {
             if (InformacionProductoEliminada != null)
             {
-                DatosEventArgs eventArgs = new DatosEventArgs(mensaje);
+                DatosEventArgs<string> eventArgs = new DatosEventArgs<string>(mensaje);
                 InformacionProductoEliminada(this, eventArgs);
             }
 

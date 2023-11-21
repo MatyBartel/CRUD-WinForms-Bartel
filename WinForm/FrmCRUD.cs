@@ -19,8 +19,6 @@ namespace WinFormApp
     public partial class FrmCRUD : Form
     {
         #region Atributos y Propiedades
-        private System.Windows.Forms.Timer timer;
-        private DateTime tiempoInicio;
 
         /// <summary>
         /// Lista de productos de la clase de coleccion.
@@ -52,11 +50,6 @@ namespace WinFormApp
         public FrmCRUD(Usuario usuario)
         {
             InitializeComponent();
-            timer = new System.Windows.Forms.Timer();
-            timer.Interval = 1000; 
-            timer.Tick += Timer_Tick;
-            tiempoInicio = DateTime.Now;
-            timer.Start();
             this.StartPosition = FormStartPosition.CenterScreen;
             this.usuarioActual = usuario;
             bolsaDeProductos = new Bolsa();
@@ -154,8 +147,8 @@ namespace WinFormApp
             {
                 int selectedIndex = lstVisor.SelectedIndex;
 
+                this.accesoTabla.EliminarDato(this.bolsaDeProductos.productos[selectedIndex].id);
                 bolsa.productos.RemoveAt(selectedIndex);
-                this.accesoTabla.EliminarDato(selectedIndex);
                 ActualizarVisor();
             }
             catch (ArgumentOutOfRangeException)
@@ -185,12 +178,12 @@ namespace WinFormApp
             if (ordenSeleccionado == "Ascendente")
             {
                 this.flagOrdenar = true;
-                bolsa.OrdenarProductosPorStock();
+                bolsa.Ordenar(e => e.stock, true);
             }
             else if (ordenSeleccionado == "Descendente")
             {
                 this.flagOrdenar = true;
-                bolsa.OrdenarProductosPorStock(true);
+                bolsa.Ordenar(e => e.stock, false);
             }
 
             ActualizarVisor();
@@ -217,12 +210,12 @@ namespace WinFormApp
             if (ordenSeleccionado == "Ascendente")
             {
                 this.flagOrdenar = true;
-                bolsa.OrdenarPorNombre();
+                bolsa.Ordenar(e => e.nombre,true);
             }
             else if (ordenSeleccionado == "Descendente")
             {
                 this.flagOrdenar = true;
-                bolsa.OrdenarPorNombre(true);
+                bolsa.Ordenar(e => e.nombre, false);
             }
 
             ActualizarVisor();
@@ -251,7 +244,6 @@ namespace WinFormApp
                     e.Cancel = true;
                 }
 
-                timer.Stop();
                 cerrarAplicacion = true;
                 Application.Exit();
             }
@@ -321,25 +313,27 @@ namespace WinFormApp
 
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
-            LimpiarDatos();
+            LimpiarDatos<Electronica>();
         }
 
-        public void LimpiarDatos()
+        public void LimpiarDatos<T>()
         {
-            DialogResult resultado = MessageBox.Show("¿Estás seguro de que deseas eliminar todos los productos?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult resultado = MessageBox.Show($"¿Estás seguro de que deseas eliminar todos los {typeof(T).Name}?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (resultado == DialogResult.Yes)
             {
-                bolsa.productos.Clear();
+                foreach (var producto in bolsa.productos.ToList())
+                {
+                    if (producto is T)
+                    {
+                        this.accesoTabla.EliminarDato(producto.id);
+                        bolsa.productos.Remove(producto);
+                    }
+                }
             }
             ActualizarVisor();
         }
 
-        private void Timer_Tick(object sender, EventArgs e)
-        {
-            TimeSpan tiempoTranscurrido = DateTime.Now - tiempoInicio;
-            lblReloj.Text = tiempoTranscurrido.ToString(@"hh\:mm\:ss");
-        }
     }
     #endregion
 }

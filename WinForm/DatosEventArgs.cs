@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace WinFormApp
 {
-    public class DatosEventArgs : EventArgs
+    public class DatosEventArgs<T> : EventArgs
     {
-        public string Mensaje { get; }
+        public T Datos { get; }
 
-        public DatosEventArgs(string mensaje)
+        public DatosEventArgs(T datos)
         {
-            Mensaje = mensaje;
+            Datos = datos;
         }
     }
 }

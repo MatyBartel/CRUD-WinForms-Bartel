@@ -83,30 +83,21 @@ namespace Entidades
 
         #region Metodos Ordenamiento
         /// <summary>
-        /// Ordena los productos en la bolsa por stock en orden ascendente o descendente.
+        /// Ordena los productos en la bolsa por la variable que desees ej: e => e.nombre - y elige si en orden ascendente o descendente.
         /// </summary>
+        /// <param name="ClaveAOrdenar">Variable por la cual ordenar, se declara asi ej: e => e.nombre.</param>
+        /// 
         /// <param name="ascendente">Indica si se debe ordenar en orden ascendente (true) o descendente (false).</param>
-        public void OrdenarProductosPorStock()
+        public void Ordenar<T>(Func<Electronica, T> ClaveAOrdenar, bool ascendente)
         {
-            elementos = elementos.OrderByDescending(e => e.stock).ToList();
-        }
-
-        public void OrdenarProductosPorStock(bool ascendente)
-        {
-            elementos = elementos.OrderByDescending(e => e.stock).Reverse().ToList();
-        }
-        /// <summary>
-        /// Ordena los productos en la bolsa por nombre en orden ascendente o descendente.
-        /// </summary>
-        /// <param name="ascendente">Indica si se debe ordenar en orden ascendente (true) o descendente (false).</param>
-        public void OrdenarPorNombre()
-        {
-            elementos = elementos.OrderByDescending(e => e.nombre).ToList();
-        }
-
-        public void OrdenarPorNombre(bool ascendente)
-        {
-            elementos = elementos.OrderByDescending(e => e.nombre).Reverse().ToList();
+            if (ascendente)
+            {
+                elementos = elementos.OrderBy(ClaveAOrdenar).ToList();
+            }
+            else
+            {
+                elementos = elementos.OrderByDescending(ClaveAOrdenar).ToList();
+            }
         }
         #endregion
     }

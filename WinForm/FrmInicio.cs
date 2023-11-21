@@ -17,7 +17,7 @@ namespace WinFormApp
     public partial class FrmInicio : Form
     {
         #region Atributos
-        public delegate void AutenticacionFallidaEventHandler(object sender, DatosEventArgs e);
+        public delegate void AutenticacionFallidaEventHandler(object sender, DatosEventArgs<string> e);
         public event AutenticacionFallidaEventHandler AutenticacionFallida;
         /// <summary>
         /// Atributo de usuario privado para que no se pueda acceder.
@@ -98,7 +98,7 @@ namespace WinFormApp
         {
             if (AutenticacionFallida != null)
             {
-                DatosEventArgs eventArgs = new DatosEventArgs(mensaje);
+                DatosEventArgs<string> eventArgs = new DatosEventArgs<string>(mensaje);
                 AutenticacionFallida(this, eventArgs);
             }
 
